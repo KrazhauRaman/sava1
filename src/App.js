@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { createStore } from '../node_modules/redux';
+import { Provider } from 'react-redux';
+import { reducer } from './Redux/Reducer';
 import './App.css';
+import SiteView from './Components/SiteView';
+import OutputArea from './Components/OutputArea';
+import StyleSelector from './Components/StyleSelector';
+
+
+const store = createStore( 
+  reducer,
+);
+
 
 class App extends Component {
   render() {
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+
+     <Provider store={store}>
+      <div className="app">
+
+        <div className="view-block">
+          <SiteView />
+        </div>
+        <div  className="control-block">          
+          <StyleSelector />
+          <OutputArea />
+        </div>
+
       </div>
+     </Provider>
     );
   }
 }
